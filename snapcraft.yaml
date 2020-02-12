@@ -1,0 +1,36 @@
+name: gosec
+adopt-info: gosec
+summary: Golang Security Checker
+description: |
+  Inspects source code for security problems by scanning the Go AST.
+
+base: core
+confinement: strict
+
+apps:
+  gosec:
+    command: bin/gosec
+    plugs:
+      - home
+      - network
+
+parts:
+  gosec:
+    plugin: go
+    go-packages:
+      - github.com/securego/gosec
+    build-packages:
+      - git
+      - gcc
+    override-pull: |
+      snapcraftctl pull
+      snapcraftctl set-version $(git -C ../go/src/github.com/securego/gosec describe --tags | sed 's/gosec\/v//')
+      snapcraftctl set-grade stable
+
+  # gosec requires a go binary in $PATH so use the go snap for this
+  go:
+    plugin: nil
+    stage-snaps:
+      - go
+    stage-packages:
+      - libc6
