@@ -18,7 +18,7 @@ parts:
   gosec:
     plugin: go
     go-packages:
-      - github.com/securego/gosec
+      - github.com/securego/gosec/cmd/gosec
     build-packages:
       - git
       - gcc
