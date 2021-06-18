@@ -25,7 +25,7 @@ parts:
       - go
     override-pull: |
       snapcraftctl pull
-      snapcraftctl set-version $(git describe --tags | sed 's/gosec\/v//')
+      snapcraftctl set-version $(git describe --tags | sed 's/v//')
       snapcraftctl set-grade stable
     override-build: |
       snapcraftctl build
