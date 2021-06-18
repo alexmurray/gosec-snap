@@ -1,35 +1,32 @@
 name: gosec
-version: 2.8.0
+adopt-info: gosec
 summary: Golang Security Checker
-grade: stable
 description: |
   Inspects source code for security problems by scanning the Go AST.
 
-base: core20
+base: core18
 confinement: strict
-architectures: [amd64]
 
 apps:
   gosec:
-    command: bin/gosec
+    command: gosec
     plugs:
       - home
       - network
 
 parts:
   gosec:
-    plugin: dump
-    source: https://github.com/securego/gosec/releases/download/v${SNAPCRAFT_PROJECT_VERSION}/gosec_${SNAPCRAFT_PROJECT_VERSION}_linux_amd64.tar.gz
-    organize:
-      gosec: bin/
-    stage:
-      - -README.md
-      - -LICENSE.txt
-
-  # gosec requires a go binary in $PATH so use the go snap for this
-  go:
-    plugin: nil
-    stage-snaps:
+    plugin: make
+    source: https://github.com/securego/gosec.git
+    build-packages:
+      - git
+      - gcc
+    build-snaps:
       - go
-    stage-packages:
-      - libc6
+    override-pull: |
+      snapcraftctl pull
+      snapcraftctl set-version $(git describe --tags | sed 's/gosec\/v//')
+      snapcraftctl set-grade stable
+    override-build: |
+      snapcraftctl build
+      cp gosec $SNAPCRAFT_PART_INSTALL
