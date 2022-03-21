@@ -1,11 +1,12 @@
 name: gosec
-adopt-info: gosec
+version: 2.11.0
 summary: Golang Security Checker
 description: |
   Inspects source code for security problems by scanning the Go AST.
 
 base: core18
 confinement: strict
+grade: stable
 
 apps:
   gosec:
@@ -18,15 +19,12 @@ parts:
   gosec:
     plugin: make
     source: https://github.com/securego/gosec.git
+    source-tag: v$SNAPCRAFT_PROJECT_VERSION
     build-packages:
       - git
       - gcc
     build-snaps:
       - go
-    override-pull: |
-      snapcraftctl pull
-      snapcraftctl set-version $(git describe --tags | sed 's/v//')
-      snapcraftctl set-grade stable
     override-build: |
       snapcraftctl build
       cp gosec $SNAPCRAFT_PART_INSTALL
