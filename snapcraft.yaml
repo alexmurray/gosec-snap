@@ -25,7 +25,12 @@ parts:
       - gcc
     build-snaps:
       - go
+    # call the built-in build-linux target
+    make-parameters:
+      - build-linux
     override-build: |
+      # build-linux hardcodes GOARCH so remove that to suport
+      sed -i 's/GOARCH=amd64 //' Makefile
       snapcraftctl build
       cp gosec $SNAPCRAFT_PART_INSTALL
 
