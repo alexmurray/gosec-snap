@@ -4,7 +4,7 @@ summary: Golang Security Checker
 description: |
   Inspects source code for security problems by scanning the Go AST.
 
-base: core18
+base: core20
 confinement: strict
 grade: stable
 
@@ -26,9 +26,7 @@ parts:
     build-snaps:
       - go
     stage-snaps:
-    - go
-    stage-packages:
-    - libc6
+      - go
     # call the built-in build-linux target
     make-parameters:
       - build-linux
