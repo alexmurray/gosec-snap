@@ -39,4 +39,6 @@ parts:
     plugin: nil
     stage-snaps:
     - go
+    stage-packages:
+    - libc6
 
