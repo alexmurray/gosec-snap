@@ -25,6 +25,10 @@ parts:
       - gcc
     build-snaps:
       - go
+    stage-snaps:
+    - go
+    stage-packages:
+    - libc6
     # call the built-in build-linux target
     make-parameters:
       - build-linux
@@ -33,12 +37,3 @@ parts:
       sed -i 's/GOARCH=amd64 //' Makefile
       snapcraftctl build
       cp gosec $SNAPCRAFT_PART_INSTALL
-
-  # gosec requires a go binary in $PATH so use the go snap for this
-  go:
-    plugin: nil
-    stage-snaps:
-    - go
-    stage-packages:
-    - libc6
-
