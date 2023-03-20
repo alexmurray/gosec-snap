@@ -25,9 +25,9 @@ parts:
       - git
       - gcc
     build-snaps:
-      - go
+      - go/latest/stable
     stage-snaps:
-      - go
+      - go/latest/stable
     # call the built-in build-linux target
     make-parameters:
       - build-linux
