@@ -1,8 +1,9 @@
 name: gosec
 version: 2.21.1
-summary: Golang Security Checker
+summary: Go Security Checker
 description: |
-  Inspects source code for security problems by scanning the Go AST.
+  Inspects source code for security problems by scanning the Go AST and SSA code
+  representation.
 license: Apache-2.0
 
 base: core22
