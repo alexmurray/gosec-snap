@@ -1,5 +1,5 @@
 name: gosec
-version: 2.22.5
+version: 2.22.8
 summary: Go Security Checker
 description: |
   Inspects source code for security problems by scanning the Go AST and SSA code
