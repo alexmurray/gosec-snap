@@ -13,6 +13,12 @@ grade: stable
 apps:
   gosec:
     command: gosec
+    environment:
+      # go puts build cache files in GOCACHE which is normally $HOME/.cache but
+      # we need to use the SNAP specific location - similarly go now generates
+      # local telemetry which is normally in $XDG_CONFIG_HOME which defaults to $HOME/.config
+      GOCACHE: $SNAP_USER_DATA/.cache/go-build
+      XDG_CONFIG_HOME: $SNAP_USER_DATA/.config
     plugs:
       - home
       - network
