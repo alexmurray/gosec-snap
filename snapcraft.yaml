@@ -22,6 +22,7 @@ apps:
     plugs:
       - home
       - network
+      - mount-observe
 
 parts:
   gosec:
